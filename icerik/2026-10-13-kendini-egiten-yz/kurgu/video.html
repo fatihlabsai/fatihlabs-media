@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="tr"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800;900&display=block" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#0b0718;font-family:Poppins,'Noto Color Emoji',sans-serif;color:#fff}
+#bg{position:absolute;inset:0;background:linear-gradient(#0b0718 0%,#1b0d33 45%,#3a1556 62%,#140a26 100%)}
+#stars{position:absolute;inset:0}
+.star{position:absolute;width:3px;height:3px;border-radius:50%;background:#fff}
+#horizon{position:absolute;left:0;right:0;top:1080px;height:160px;background:radial-gradient(ellipse at 50% 60%,rgba(255,90,220,.45),transparent 70%)}
+#top{position:absolute;top:56px;left:48px;right:48px;display:flex;justify-content:space-between;align-items:center;z-index:10}
+.pill{background:#ffc400;color:#1a0d2b;font-weight:800;font-size:40px;padding:10px 30px 10px 26px;border-radius:40px;display:flex;align-items:center;gap:14px}
+.pill i{width:20px;height:20px;border-radius:50%;background:#1a0d2b;display:block}
+.tag{font-weight:600;font-size:36px;opacity:.9}
+#bar{position:absolute;top:0;left:0;height:12px;background:#ffc400;z-index:11}
+.scene{position:absolute;left:0;right:0;top:300px;height:900px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 70px;opacity:0}
+.big{font-weight:900;font-size:118px;line-height:1.08;text-transform:uppercase;text-shadow:0 8px 0 rgba(0,0,0,.35)}
+.y{color:#ffc400}.r{color:#ff5470}.g{color:#4be39a}
+.emoji{font-size:230px;line-height:1}
+.circle{width:430px;height:430px;border-radius:50%;background:#ffc400;display:flex;align-items:center;justify-content:center;font-size:220px;box-shadow:0 0 80px rgba(255,196,0,.35)}
+.label{background:#ffc400;color:#1a0d2b;font-weight:800;font-size:40px;padding:8px 30px;border-radius:30px;margin-bottom:34px}
+.card{background:rgba(25,12,45,.85);border:4px solid #ffc400;border-radius:30px;padding:36px 44px;font-size:48px;font-weight:600;text-align:left;width:100%}
+.card.red{border-color:#ff5470}.card.green{border-color:#4be39a}
+.sub{font-weight:700;font-size:56px;line-height:1.25;margin-top:44px}
+.small{font-weight:500;font-size:34px;opacity:.75;margin-top:22px}
+.steps{display:flex;flex-direction:column;gap:30px;width:100%}
+.step{display:flex;align-items:center;gap:30px;background:rgba(25,12,45,.85);border:4px solid rgba(255,255,255,.25);border-radius:30px;padding:26px 36px;font-weight:800;font-size:66px}
+.step .n{width:96px;height:96px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:56px;flex:none}
+.step.on{border-color:#ffc400}.step.on .n{background:#ffc400;color:#1a0d2b}
+.loop{position:relative;width:700px;height:700px}
+.loop .ring{position:absolute;inset:60px;border-radius:50%;border:10px dashed rgba(255,196,0,.7)}
+.loop .node{position:absolute;width:250px;padding:14px 0;border-radius:24px;background:#1a0d2b;border:4px solid #ffc400;font-weight:800;font-size:44px}
+.dot{position:absolute;width:64px;height:64px;border-radius:50%;background:#ff5470;box-shadow:0 0 40px #ff5470}
+#cap{position:absolute;left:60px;right:60px;top:1310px;text-align:center;font-weight:800;font-size:84px;line-height:1.15;text-shadow:0 6px 0 rgba(0,0,0,.5),0 0 30px rgba(0,0,0,.6);z-index:9}
+#cap .w{color:#fff}#cap .w.on{color:#ffc400}
+#src{position:absolute;left:0;right:0;bottom:70px;text-align:center;font-size:30px;font-weight:500;opacity:.7;z-index:9}
+</style></head><body>
+<div id="bg"></div><div id="stars"></div><div id="horizon"></div><canvas id="grid" width="1080" height="1920" style="position:absolute;inset:0"></canvas>
+<div id="bar"></div>
+<div id="top"><div class="pill"><i></i>Fatih Labs</div><div class="tag">AI Gündem</div></div>
+
+<div class="scene" id="s0">
+  <div class="emoji" style="margin-bottom:40px">🤖<span style="font-size:170px">📝</span></div>
+  <div class="big">Kendi notunu<br>veren <span class="y">yapay<br>zekâ</span></div>
+</div>
+<div class="scene" id="s1">
+  <div class="circle">⚠️</div>
+  <div class="sub">Peki ne <span class="r">ters</span> gidebilir?</div>
+</div>
+<div class="scene" id="s2">
+  <div class="label">YENİ ARAŞTIRMA</div>
+  <div class="big" style="font-size:150px">MASS</div>
+  <div class="sub">Sakana AI 🇯🇵<br><span style="font-weight:500;font-size:44px;opacity:.85">Multi-Agent Self-Supervision</span></div>
+</div>
+<div class="scene" id="s3">
+  <div class="label">TEK MODEL · ÜÇ İŞ</div>
+  <div class="steps">
+    <div class="step" id="st1"><div class="n">1</div>✍️ Çöz</div>
+    <div class="step" id="st2"><div class="n">2</div>💯 Puanla</div>
+    <div class="step" id="st3"><div class="n">3</div>🔁 Kendini eğit</div>
+  </div>
+</div>
+<div class="scene" id="s4">
+  <div class="label">SONUÇ</div>
+  <div class="card green" id="c1">✅ Araştırma görevleri<br><span style="font-size:40px;opacity:.85">ScienceAgentBench: 28,8 → 31,7</span></div>
+  <div class="card red" id="c2" style="margin-top:30px">➖ Her alanda değil<br><span style="font-size:40px;opacity:.85">Kodlama testlerinde hafif düşüş</span></div>
+</div>
+<div class="scene" id="s5">
+  <div class="loop">
+    <div class="ring"></div>
+    <div class="node" style="left:225px;top:0">Çöz</div>
+    <div class="node" style="right:0;top:470px">Puanla</div>
+    <div class="node" style="left:0;top:470px">Eğit</div>
+    <div class="dot" id="dot"></div>
+  </div>
+  <div class="sub" style="margin-top:10px">Göremediği hatayı<br><span class="r">“başarı”</span> sanıyor</div>
+</div>
+<div class="scene" id="s6">
+  <div class="circle">🪞</div>
+  <div class="sub">Kör nokta zamanla<br><span class="y">pekişebilir</span></div>
+  <div class="small" id="risk">Araştırmacılar da bunu bir risk olarak görüyor</div>
+</div>
+<div class="scene" id="s7">
+  <div class="emoji">🧑‍💻📄</div>
+  <div class="sub">Kendi notunu kendin verince<br><span class="r">hatanı göremezsin</span></div>
+</div>
+<div class="scene" id="s8">
+  <div class="emoji">🤝</div>
+  <div class="big" style="font-size:100px;margin-top:30px">Notunu<br><span class="y">başkasına da</span><br>verdir</div>
+</div>
+<div class="scene" id="s9">
+  <div class="circle">💬</div>
+  <div class="sub">Sen en son kimden<br><span class="y">geri bildirim</span> istedin?</div>
+  <div class="small" style="opacity:.95;font-size:40px;font-weight:700">👇 Yorumlara yaz · Takip et</div>
+</div>
+
+<div id="cap"></div>
+<div id="src">Kaynak: Sakana AI &amp; UC Berkeley · github.com/SakanaAI/mass</div>
+
+<script>
+const W = WORDS_JSON;
+const DUR = DURATION;
+const disp = s => s === "Mass" ? "MASS" : s;
+// stars (deterministic)
+let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+const st = document.getElementById('stars');
+for (let i = 0; i < 90; i++) { const d = document.createElement('div'); d.className = 'star';
+  d.style.left = rnd()*1080+'px'; d.style.top = rnd()*1100+'px'; d.style.opacity = .3+rnd()*.6; d.dataset.p = rnd()*6; st.appendChild(d); }
+// caption chunks: max 3 words, break at pauses
+const chunks = []; let cur = [];
+W.forEach((w, i) => { const gap = i ? w[1] - W[i-1][2] : 0;
+  if (cur.length && (cur.length >= 3 || gap > 0.25)) { chunks.push(cur); cur = []; } cur.push(i); });
+chunks.push(cur);
+// scenes start at word indices
+const SC = [[0,0],[1,13],[2,17],[3,26],[4,49],[5,57],[6,78],[7,93],[8,111],[9,120]];
+const sceneStart = SC.map(([s, i]) => i === 0 ? 0 : W[i][1] - 0.15);
+const ease = x => 1 - Math.pow(1 - Math.min(Math.max(x,0),1), 3);
+function setT(t) {
+  document.getElementById('bar').style.width = (t / DUR * 100) + '%';
+  drawGrid(t);
+  document.querySelectorAll('.star').forEach(s => s.style.opacity = .35 + .45*Math.abs(Math.sin(t*1.3 + +s.dataset.p)));
+  SC.forEach(([s], k) => {
+    const el = document.getElementById('s'+s);
+    const a = sceneStart[k], b = k+1 < SC.length ? sceneStart[k+1] : DUR + 1;
+    if (t < a || t >= b) { el.style.opacity = 0; return; }
+    const p = ease((t - a) / 0.35);
+    el.style.opacity = p;
+    el.style.transform = `translateY(${(1-p)*60}px) scale(${0.94 + 0.06*p + 0.012*(t-a)})`;
+  });
+  // step highlight
+  [[1,33],[2,36],[3,40]].forEach(([n,i]) => document.getElementById('st'+n).classList.toggle('on', t >= W[i][1] - 0.1));
+  const c2 = document.getElementById('c2'); c2.style.opacity = t >= W[53][1] - 0.1 ? 1 : 0;
+  const c1 = document.getElementById('c1'); c1.style.opacity = t >= W[50][1] - 0.2 ? 1 : 0;
+  document.getElementById('risk').style.opacity = t >= W[86][1] - 0.1 ? .8 : 0;
+  // red dot circling the loop, staying the same size
+  const ang = -Math.PI/2 + (t - sceneStart[5]) * 2.2, R = 290;
+  const dot = document.getElementById('dot'); dot.style.left = (350 - 32 + R*Math.cos(ang)) + 'px'; dot.style.top = (350 - 32 + R*Math.sin(ang)) + 'px';
+  dot.style.opacity = t >= W[61][1] ? 1 : 0;
+  // captions
+  let ci = chunks.findIndex((c, k) => t >= W[c[0]][1] - 0.05 && (k+1 >= chunks.length || t < W[chunks[k+1][0]][1] - 0.05));
+  const cap = document.getElementById('cap');
+  if (ci < 0 || t > W[chunks[ci][chunks[ci].length-1]][2] + 0.6) { cap.innerHTML = ''; return; }
+  const act = chunks[ci].filter(i => t >= W[i][1] - 0.05).pop();
+  cap.innerHTML = chunks[ci].map(i => `<span class="w${i === act ? ' on' : ''}">${disp(W[i][0])}</span>`).join(' ');
+}
+function drawGrid(t) {
+  const c = document.getElementById('grid'), g = c.getContext('2d'), H = 1150, cx = 540;
+  g.clearRect(0, 0, 1080, 1920); g.strokeStyle = 'rgba(214,92,255,.7)'; g.lineWidth = 3;
+  for (let k = -14; k <= 14; k++) { g.beginPath(); g.moveTo(cx + k*14, H); g.lineTo(cx + k*260, 1920); g.stroke(); }
+  const off = (t * 0.6) % 1;
+  for (let k = 0; k < 14; k++) { const z = k + 1 - off; const y = H + 770 * (1 / (14 - z + 1)) * 1.0; if (y < H) continue;
+    const yy = H + (1920 - H) * Math.pow(z / 14, 2.2); g.globalAlpha = Math.min(1, z / 4); g.beginPath(); g.moveTo(0, yy); g.lineTo(1080, yy); g.stroke(); }
+  g.globalAlpha = 1;
+}
+window.setT = setT; setT(0);
+</script></body></html>
