@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<style>
+@font-face { font-family: P; font-weight: 500; src: url(fonts/Poppins-Medium.ttf); }
+@font-face { font-family: P; font-weight: 600; src: url(fonts/Poppins-SemiBold.ttf); }
+@font-face { font-family: P; font-weight: 700; src: url(fonts/Poppins-Bold.ttf); }
+@font-face { font-family: P; font-weight: 800; src: url(fonts/Poppins-ExtraBold.ttf); }
+@font-face { font-family: P; font-weight: 900; src: url(fonts/Poppins-Black.ttf); }
+:root {
+  --sari: #FFC20E;
+  --kirmizi: #F0405A;
+  --yesil: #2ED47A;
+  --mor: #6A1FD1;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0b0614; }
+body { font-family: P, "Noto Color Emoji", sans-serif; color: #fff; position: relative; }
+.emo { font-family: "Noto Color Emoji"; font-weight: 400; }
+canvas#bg { position: absolute; inset: 0; }
+#ust { position: absolute; left: 0; right: 0; top: 0; height: 200px; }
+#ilerleme { position: absolute; left: 0; right: 0; top: 0; height: 12px; background: #2b2833; }
+#ilerleme i { display: block; height: 100%; width: 0; background: var(--sari); }
+.marka { position: absolute; left: 50px; top: 70px; height: 86px; padding: 0 56px 0 26px; border-radius: 43px;
+  background: var(--sari); color: #111; font-weight: 800; font-size: 44px; display: flex; align-items: center; gap: 14px; letter-spacing: -0.5px; }
+.marka::before { content: ""; width: 36px; height: 36px; border-radius: 50%; background: #111; }
+#kategori { position: absolute; right: 52px; top: 86px; font-weight: 600; font-size: 38px; }
+#sahne { position: absolute; left: 0; right: 0; top: 230px; height: 1060px; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 46px; padding: 0 40px; }
+.yazi { text-align: center; font-weight: 800; font-size: 60px; line-height: 1.18;
+  text-shadow: 0 0 6px #000, 0 4px 0 #000, 3px 3px 0 #000, -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000; }
+.yazi.buyuk { font-size: 68px; }
+.daire { width: 460px; height: 460px; border-radius: 50%; background: var(--sari); display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 40px rgba(255,194,14,.55); color: #111; font-weight: 900; font-size: 190px; letter-spacing: -6px; }
+.daire .emo { font-size: 210px; letter-spacing: 0; }
+.serbest-emoji { font-size: 200px; line-height: 1; }
+.serbest-emoji.kucuk { font-size: 150px; }
+.etiket { background: var(--sari); color: #111; font-weight: 800; font-size: 44px; padding: 8px 42px; border-radius: 44px; }
+.hapler { display: flex; flex-direction: column; align-items: center; gap: 28px; }
+.hap { background: var(--mor); border: 4px solid #b98cff; border-radius: 60px; padding: 10px 44px; font-weight: 800; font-size: 54px;
+  box-shadow: 0 0 24px rgba(140, 70, 255, .45); }
+.kartlar { width: 100%; display: flex; flex-direction: column; gap: 52px; }
+.kart { position: relative; border: 5px solid; border-radius: 34px; background: rgba(16, 10, 26, .88); padding: 58px 46px 40px;
+  font-weight: 500; font-size: 52px; line-height: 1.22; }
+.kart.kirmizi { border-color: var(--kirmizi); box-shadow: 0 0 22px rgba(240,64,90,.35); }
+.kart.yesil { border-color: var(--yesil); box-shadow: 0 0 22px rgba(46,212,122,.35); }
+.kart.soluk .govde { opacity: .55; }
+.kart .tag { position: absolute; left: 30px; top: -32px; background: #160d22; border: 4px solid; border-radius: 30px; padding: 2px 22px;
+  font-weight: 800; font-size: 36px; }
+.kart.kirmizi .tag { color: var(--kirmizi); border-color: var(--kirmizi); }
+.kart.yesil .tag { color: var(--yesil); border-color: var(--yesil); }
+.kaynak { font-weight: 600; font-size: 34px; color: #d9c8ff; opacity: .9; }
+#altyazi { position: absolute; left: 30px; right: 30px; top: 1330px; height: 160px; display: flex; align-items: center; justify-content: center;
+  text-align: center; font-weight: 900; font-size: 84px; line-height: 1.12; letter-spacing: 1px;
+  text-shadow: 0 0 8px #000, 0 5px 0 #000, 4px 4px 0 #000, -4px -4px 0 #000, 4px -4px 0 #000, -4px 4px 0 #000; }
+#altyazi b { color: var(--sari); font-weight: 900; }
+/* başlık sahnesi */
+.baslik { position: absolute; left: 0; right: 0; top: 960px; text-align: center; font-weight: 900; font-size: 128px; line-height: 1.12; letter-spacing: 1px;
+  text-shadow: 0 0 10px #000, 0 6px 0 #000, 5px 5px 0 #000, -5px -5px 0 #000, 5px -5px 0 #000, -5px 5px 0 #000; }
+.baslik .s { color: var(--sari); }
+.baslik-emoji { position: absolute; left: 0; right: 0; top: 470px; text-align: center; font-size: 260px; line-height: 1; }
+/* kapak */
+.kapak .baslik { top: 930px; font-size: 122px; }
+.kapak .alt-etiket { position: absolute; left: 0; right: 0; top: 1390px; display: flex; justify-content: center; }
+.kapak .alt-etiket span { background: var(--sari); color: #111; font-weight: 800; font-size: 46px; padding: 10px 46px; border-radius: 50px; }
+.kapak .kart { position: absolute; width: 700px; font-size: 52px; padding: 84px 44px 40px; }
+.kapak .kart .tag { top: 26px; left: 30px; background: var(--kirmizi); color: #160d22; border: none; padding: 0 22px; font-size: 38px; }
+.kapak .kart.yesil .tag { background: var(--yesil); }
+.kapak .k1 { left: 60px; top: 270px; transform: rotate(-3deg); }
+.kapak .k2 { left: 330px; top: 590px; transform: rotate(2deg); }
+.kapak .kapak-emoji { position: absolute; left: 90px; top: 640px; font-size: 170px; }
+/* son kart */
+.son { position: absolute; left: 0; right: 0; top: 500px; display: flex; flex-direction: column; align-items: center; gap: 36px; }
+.son .marka { position: static; height: 190px; border-radius: 95px; padding: 0 80px 0 50px; font-size: 92px; gap: 30px; }
+.son .marka::before { width: 66px; height: 66px; }
+.son .y1 { font-weight: 800; font-size: 64px; margin-top: 30px; text-shadow: 0 4px 0 #000, 3px 3px 0 #000, -3px -3px 0 #000; }
+.son .y2 { font-weight: 900; font-size: 82px; color: var(--sari); text-shadow: 0 4px 0 #000, 3px 3px 0 #000, -3px -3px 0 #000; }
+</style>
+</head>
+<body>
+<canvas id="bg" width="1080" height="1920"></canvas>
+<div id="katman"></div>
+<div id="altyazi"></div>
+<div id="ust"><div id="ilerleme"><i></i></div><div class="marka">Fatih Labs</div><div id="kategori"></div></div>
+<script>
+// window.KURGU = { kategori, kapak, sahneler:[{...,bas,bit,kelimeler:[{w,bas,bit}]}], sure, sesBaslangic }
+const W = 1080, H = 1920, UFUK = 1150;
+const cv = document.getElementById('bg'), cx = cv.getContext('2d');
+
+// Sabit yıldızlar
+let tohum = 7;
+const rnd = () => (tohum = (tohum * 16807) % 2147483647) / 2147483647;
+const yildizlar = Array.from({ length: 170 }, () => ({ x: rnd() * W, y: rnd() * (UFUK - 40), r: 1.2 + rnd() * 2.6, f: rnd() * 6.28 }));
+
+function arkaPlan(t, parlak) {
+  const g = cx.createLinearGradient(0, 0, 0, UFUK);
+  if (parlak) { g.addColorStop(0, '#1a0a3a'); g.addColorStop(0.7, '#3c1470'); g.addColorStop(1, '#7a2a9a'); }
+  else { g.addColorStop(0, '#07040f'); g.addColorStop(0.55, '#1c0d38'); g.addColorStop(1, '#3a1460'); }
+  cx.fillStyle = g; cx.fillRect(0, 0, W, UFUK);
+  for (const s of yildizlar) {
+    cx.globalAlpha = 0.45 + 0.4 * Math.sin(t * 1.3 + s.f);
+    cx.fillStyle = '#fff'; cx.fillRect(s.x, s.y, s.r, s.r);
+  }
+  cx.globalAlpha = 1;
+  const z = cx.createLinearGradient(0, UFUK, 0, H);
+  z.addColorStop(0, parlak ? '#3a0f58' : '#1e0a33'); z.addColorStop(1, '#0a0614');
+  cx.fillStyle = z; cx.fillRect(0, UFUK, W, H - UFUK);
+  // Ufuk parıltısı
+  const p = cx.createLinearGradient(0, UFUK - 110, 0, UFUK + 30);
+  p.addColorStop(0, 'rgba(200,60,200,0)'); p.addColorStop(0.8, parlak ? 'rgba(235,90,230,.75)' : 'rgba(200,60,200,.5)'); p.addColorStop(1, 'rgba(200,60,200,0)');
+  cx.fillStyle = p; cx.fillRect(0, UFUK - 110, W, 140);
+  // Perspektif ızgara
+  cx.strokeStyle = parlak ? 'rgba(240,90,230,.95)' : 'rgba(205,70,200,.75)'; cx.lineWidth = 3;
+  const vx = W / 2;
+  for (let i = -22; i <= 22; i++) {
+    cx.beginPath(); cx.moveTo(vx + i * 14, UFUK); cx.lineTo(vx + i * 260, H); cx.stroke();
+  }
+  const kay = (t * 0.35) % 1;
+  for (let k = 0; k < 14; k++) {
+    const d = (k + kay) / 14, y = UFUK + (H - UFUK) * d * d;
+    cx.lineWidth = 2 + 3 * d; cx.beginPath(); cx.moveTo(0, y); cx.lineTo(W, y); cx.stroke();
+  }
+}
+
+const kat = document.getElementById('katman'), alt = document.getElementById('altyazi');
+const ilerleme = document.querySelector('#ilerleme i'), ust = document.getElementById('ust');
+const esc = s => String(s).replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+const norm = s => s.toLocaleLowerCase('tr').replace(/[^\p{L}\p{N}]/gu, '');
+const emojiSar = s => esc(s).replace(/(\p{Extended_Pictographic}️?(‍\p{Extended_Pictographic}️?)*|\p{Regional_Indicator}{2})/gu, '<span class="emo">$1</span>');
+
+function zamanBul(sahne, kelime) {
+  if (!kelime) return sahne.bas;
+  const n = norm(kelime);
+  const k = sahne.kelimeler.find(x => norm(x.w) === n);
+  return k ? k.bas : sahne.bas;
+}
+
+function sahneKur(s) {
+  const pars = [];
+  const add = (html, goster, cls = '') => pars.push(`<div class="anim ${cls}" data-t="${zamanBul(s, goster)}">${html}</div>`);
+  if (s.tur === 'baslik') {
+    kat.innerHTML = `<div class="anim baslik-emoji emo bob" data-t="${s.bas}">${s.emoji}</div>
+      <div class="anim baslik" data-t="${s.bas}">${s.baslik.map(([m, r]) => `<div class="${r === 's' ? 's' : ''}">${esc(m)}</div>`).join('')}</div>`;
+    return;
+  }
+  if (s.tur === 'son') {
+    kat.innerHTML = `<div class="anim son" data-t="${s.bas}" data-fade="1"><div class="marka">Fatih Labs</div>
+      <div class="y1">Kaydet &amp; takip et:</div><div class="y2">@fatihlabsai</div></div>`;
+    return;
+  }
+  if (s.etiket) add(`<div class="etiket">${esc(s.etiket)}</div>`, s.etiketGoster);
+  if (s.ustYazi) add(`<div class="yazi">${emojiSar(s.ustYazi)}</div>`, s.ustYaziGoster);
+  if (s.daire) add(`<div class="daire">${s.daire.emoji ? `<span class="emo bob">${s.daire.emoji}</span>` : esc(s.daire.metin)}</div>`, s.daire.goster);
+  if (s.emoji) add(`<div class="serbest-emoji emo bob ${s.emojiKucuk ? 'kucuk' : ''}">${s.emoji}</div>`, s.emojiGoster);
+  if (s.hapler) pars.push(`<div class="hapler">${s.hapler.map(h => `<div class="anim hap" data-t="${zamanBul(s, h.goster)}">${emojiSar(h.metin)}</div>`).join('')}</div>`);
+  if (s.kartlar) pars.push(`<div class="kartlar">${s.kartlar.map(k => `<div class="anim kart ${k.renk} ${k.soluk ? 'soluk' : ''}" data-t="${zamanBul(s, k.goster)}">
+      <div class="tag">${emojiSar(k.etiket)}</div><div class="govde">${emojiSar(k.metin)}</div></div>`).join('')}</div>`);
+  if (s.altYazi) add(`<div class="yazi">${emojiSar(s.altYazi)}</div>`, s.altYaziGoster);
+  if (s.emojiAlt) add(`<div class="serbest-emoji emo bob kucuk">${s.emojiAlt}</div>`, s.emojiAltGoster);
+  if (s.kaynak) add(`<div class="kaynak">${esc(s.kaynak)}</div>`, s.kaynakGoster);
+  kat.innerHTML = `<div id="sahne" style="${s.sahneStil || ''}">${pars.join('')}</div>`;
+}
+
+function kapakKur(k) {
+  kat.innerHTML = `<div class="kapak"><div class="marka" style="top:110px;left:60px">Fatih Labs</div>
+    ${k.kartlar.map((c, i) => `<div class="kart ${c.renk} k${i + 1}"><div class="tag">${esc(c.etiket)}</div>${esc(c.metin)}</div>`).join('')}
+    <div class="kapak-emoji emo">${k.emoji}</div>
+    <div class="baslik">${k.baslik.map(([m, r]) => `<div class="${r === 's' ? 's' : ''}">${esc(m)}</div>`).join('')}</div>
+    <div class="alt-etiket"><span>${esc(k.altEtiket)}</span></div></div>`;
+}
+
+// Altyazı parçaları: en fazla 3 kelime / ~20 harf, noktalamada böl
+function parcala(kelimeler) {
+  const out = []; let cur = [];
+  for (const k of kelimeler) {
+    const uz = cur.map(x => x.w).join(' ').length;
+    if (cur.length && (cur.length >= 3 || uz + k.w.length + 1 > 20)) { out.push(cur); cur = []; }
+    cur.push(k);
+    if (/[.,?!:;]$/.test(k.w)) { out.push(cur); cur = []; }
+  }
+  if (cur.length) out.push(cur);
+  return out;
+}
+
+const D = window.KURGU;
+const vurgular = new Set((D.vurgu || []).map(norm));
+for (const s of D.sahneler) s.parcalar = s.altyazi === false ? [] : parcala(s.kelimeler);
+
+const easeBack = p => { const c = 1.7; p -= 1; return 1 + (c + 1) * p * p * p + c * p * p; };
+let aktif = null;
+
+window.ciz = function (t) {
+  const kapakta = D.kapak && t < D.sesBaslangic;
+  arkaPlan(t, kapakta);
+  ust.style.display = kapakta ? 'none' : '';
+  if (kapakta) {
+    if (aktif !== 'kapak') { kapakKur(D.kapak); aktif = 'kapak'; alt.innerHTML = ''; }
+    // Kapakta marka etiketi sol üstte daha aşağıda
+    return;
+  }
+  ilerleme.style.width = (Math.min(1, t / D.sure) * 100).toFixed(2) + '%';
+  document.getElementById('kategori').textContent = D.kategori;
+  let idx = 0;
+  for (let i = 0; i < D.sahneler.length; i++) if (t >= D.sahneler[i].bas) idx = i;
+  const s = D.sahneler[idx];
+  if (aktif !== idx) { sahneKur(s); aktif = idx; }
+  for (const el of kat.querySelectorAll('.anim')) {
+    const t0 = +el.dataset.t, p = Math.max(0, Math.min(1, (t - t0) / 0.3));
+    if (el.dataset.fade) { el.style.opacity = p; continue; }
+    el.style.opacity = p > 0 ? Math.min(1, p * 2.5) : 0;
+    el.style.transform = `scale(${0.55 + 0.45 * easeBack(p)})`;
+  }
+  for (const el of kat.querySelectorAll('.bob')) {
+    el.style.transform = `translateY(${(Math.sin(t * 2.2) * 12).toFixed(1)}px) rotate(${(Math.sin(t * 1.6) * 5).toFixed(1)}deg)`;
+  }
+  // Altyazı
+  let parca = null;
+  for (const p of s.parcalar) if (t >= p[0].bas - 0.05) parca = p;
+  if (!parca) { alt.innerHTML = ''; return; }
+  alt.innerHTML = '<span>' + parca.map(k => vurgular.has(norm(k.w)) ? `<b>${esc(k.w)}</b>` : esc(k.w)).join(' ') + '</span>';
+  const p = Math.max(0, Math.min(1, (t - parca[0].bas + 0.05) / 0.18));
+  alt.style.transform = `scale(${0.8 + 0.2 * easeBack(p)})`;
+};
+</script>
+</body>
+</html>

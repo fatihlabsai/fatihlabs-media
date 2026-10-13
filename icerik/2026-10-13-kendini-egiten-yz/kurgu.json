@@ -1,0 +1,92 @@
+{
+  "kategori": "AI Gündem",
+  "dil": "tr",
+  "vurgu": ["kendini", "notunu", "MASS", "üç", "çözüyor", "puanlıyor", "eğitiyor", "Araştırma", "sorun", "başarı", "kör", "pekişebilir", "risk", "başkasına", "dürüst", "takip"],
+  "kapak": {
+    "emoji": "📝",
+    "baslik": [["KENDİ NOTUNU", "b"], ["VEREN", "s"], ["YAPAY ZEKÂ?", "b"]],
+    "altEtiket": "Sakana AI'ın yeni araştırması",
+    "kartlar": [
+      { "renk": "yesil", "etiket": "DÖNGÜ", "metin": "Çöz → Puanla → Kendini eğit" },
+      { "renk": "kirmizi", "etiket": "KÖR NOKTA", "metin": "Göremediği hatayı \"başarı\" sanıyor" }
+    ]
+  },
+  "sahneler": [
+    {
+      "konusma": "Bu yapay zekâ kendi ödevini yapıyor, kendi notunu veriyor, sonra da kendini eğitiyor. Peki ne ters gidebilir?",
+      "tur": "baslik",
+      "altyazi": false,
+      "emoji": "📝",
+      "baslik": [["KENDİ NOTUNU", "b"], ["VEREN", "s"], ["YAPAY ZEKÂ?", "b"]]
+    },
+    {
+      "konusma": "Japon şirketi Sakana AI, MASS adında bir yöntem denedi.",
+      "daire": { "emoji": "🇯🇵" },
+      "altYazi": "Sakana AI · MASS yöntemi",
+      "kaynak": "github.com/SakanaAI/mass",
+      "kaynakGoster": "MASS"
+    },
+    {
+      "konusma": "Tek bir model üç işi birden yapıyor.",
+      "daire": { "metin": "1 → 3" },
+      "altYazi": "Tek model, üç ayrı iş"
+    },
+    {
+      "konusma": "Bir: görevi çözüyor. İki: kendi çalışmasını puanlıyor. Üç: en iyi notu alan denemeleriyle kendini yeniden eğitiyor.",
+      "etiket": "MASS DÖNGÜSÜ",
+      "hapler": [
+        { "metin": "1 · Çöz 🧩", "goster": "Bir:" },
+        { "metin": "2 · Puanla 💯", "goster": "İki:" },
+        { "metin": "3 · Kendini eğit 🔁", "goster": "Üç:" }
+      ],
+      "emojiAlt": "🤖"
+    },
+    {
+      "konusma": "Sonuç? Araştırma görevlerinde gelişiyor, ama her alanda değil.",
+      "etiket": "SONUÇ",
+      "kartlar": [
+        { "renk": "yesil", "etiket": "✅ GELİŞİYOR", "metin": "Araştırma görevlerinde daha iyi" },
+        { "renk": "kirmizi", "etiket": "❌ HER YERDE DEĞİL", "metin": "Bazı kodlama testlerinde hafif düşüş", "soluk": true, "goster": "ama" }
+      ]
+    },
+    {
+      "konusma": "Ve bir sorun var: Bir hatayı hem çözerken hem puanlarken kaçırırsa, onu başarı sanıyor ve o hatayı daha da iyi öğrenebilir.",
+      "ustYazi": "Sorun ne?",
+      "hapler": [
+        { "metin": "Çözerken kaçırdı", "goster": "çözerken" },
+        { "metin": "Puanlarken de kaçırdı", "goster": "puanlarken" }
+      ],
+      "emojiAlt": "⚠️",
+      "emojiAltGoster": "başarı"
+    },
+    {
+      "konusma": "Yani kör noktası, yani göremediği hata, zamanla pekişebilir. Araştırmacılar da bunu bir risk olarak görüyor.",
+      "daire": { "emoji": "🙈" },
+      "altYazi": "Kör nokta = göremediği hata",
+      "kaynak": "Araştırmacılara göre: açık bir risk",
+      "kaynakGoster": "Araştırmacılar"
+    },
+    {
+      "konusma": "Biz de böyle değil miyiz? Kendi yazını, kendi planını kontrol ederken gözünden kaçan şey, ikinci okumada da kaçar.",
+      "emoji": "🪞",
+      "altYazi": "Kendi hatanı kendin zor görürsün"
+    },
+    {
+      "konusma": "Ders basit: Önemli bir işte notunu başkasına da verdir.",
+      "etiket": "DERS",
+      "kartlar": [
+        { "renk": "kirmizi", "etiket": "❌ TEK BAŞINA", "metin": "Kendi işini sadece kendin kontrol etmek", "soluk": true },
+        { "renk": "yesil", "etiket": "✅ DAHA İYİ", "metin": "Notunu başkasına da verdir", "goster": "notunu" }
+      ]
+    },
+    {
+      "konusma": "Sen en son kimden dürüst geri bildirim istedin?",
+      "daire": { "emoji": "💬" },
+      "altYazi": "Sen kimden geri bildirim istedin?"
+    },
+    {
+      "konusma": "Yorumlara yaz, devamı için takip et.",
+      "tur": "son"
+    }
+  ]
+}

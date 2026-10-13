@@ -13,3 +13,4 @@ Bu repo, Fatih Labs kanalının yapay zekâ konulu kısa videolarını (Shorts/R
 - Yeni içerik için `/yeni-short` akışını ve `.claude/agents/` içindeki alt ajanları kullan.
 - Hiçbir iddiayı kaynaksız yayın metnine koyma; `dogrulayici` alt ajanından geçmeyen senaryo yayına hazır sayılmaz.
 - `.mp4` ve `.png` dosyalarını silme veya üzerine yazma.
+- Video kurgusu için `araclar/kurgu/` aracını kullan (bkz. `araclar/kurgu/README.md`); önceki videolarla aynı görsel tarzı korur.
