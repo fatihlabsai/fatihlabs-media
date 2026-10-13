@@ -48,7 +48,7 @@ Claude Code'da bu repoyu açıp şunlardan birini yaz:
 - `gundem-arastirmaci ile bugünün konularını bul` → tek bir alt ajanı çağırırsın.
 - `dogrulayici ile icerik/.../senaryo-tr.md dosyasını kontrol et`
 
-Kurulu alt ajanları görmek ve düzenlemek için Claude Code'da `/agents` yaz.
+Kurulu alt ajanları görmek veya değiştirmek için `.claude/agents/` klasöründeki dosyaları aç ya da Claude'a "senarist ajanını şöyle değiştir" diye söyle.
 
 ## 5. Kendi alt ajanını yapmak
 
