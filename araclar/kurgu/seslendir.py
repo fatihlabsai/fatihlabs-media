@@ -14,6 +14,7 @@ import base64
 import json
 import os
 import sys
+import urllib.error
 import urllib.request
 from pathlib import Path
 
@@ -37,8 +38,11 @@ istek = urllib.request.Request(
     data=json.dumps(govde).encode(),
     headers={"xi-api-key": anahtar, "Content-Type": "application/json"},
 )
-with urllib.request.urlopen(istek, timeout=180) as yanit:
-    sonuc = json.load(yanit)
+try:
+    with urllib.request.urlopen(istek, timeout=180) as yanit:
+        sonuc = json.load(yanit)
+except urllib.error.HTTPError as e:
+    sys.exit(f"ElevenLabs hatası {e.code}: {e.read().decode(errors='replace')}")
 
 (klasor / "ses.mp3").write_bytes(base64.b64decode(sonuc["audio_base64"]))
 (klasor / "hizalama.json").write_text(json.dumps(sonuc["alignment"], ensure_ascii=False), encoding="utf-8")
